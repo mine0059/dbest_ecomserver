@@ -1,0 +1,28 @@
+{
+  "name": "ecomserver",
+  "version": "1.0.0",
+  "description": "first ecom server",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mine0059/dbest_ecomserver.git"
+  },
+  "author": "minemage",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mine0059/dbest_ecomserver/issues"
+  },
+  "homepage": "https://github.com/mine0059/dbest_ecomserver#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.13.2",
+    "nodemon": "^3.1.9"
+  }
+}
