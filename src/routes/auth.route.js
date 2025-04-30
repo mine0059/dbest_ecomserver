@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {register, login} = require('../controllers/auth.controller');
+const {register, login, verifyToken} = require('../controllers/auth.controller');
 const {body} = require('express-validator');
 
 const validateUser = [
@@ -14,6 +14,7 @@ const validateUser = [
 
 router.post('/login', login);
 router.post('/register', validateUser, register);
+router.get('/verify-token', verifyToken);
 // router.post('/forgot-password', signup);
 // router.post('/verify-otp', signup);
 // router.post('/reset-password', signin);

@@ -77,6 +77,28 @@ const login = async (req, res) => {
    }
 };
 
+const verifyToken = async (req, res) => {
+    try {
+      let accessToken = req.headers.authorization;
+      if (!accessToken) return res.json(false);
+      accessToken = accessToken.replace('Bearer ', '').trim();
+
+      const token = await Token.findOne({accessToken});
+      if (!token) return res.json(false);
+
+      const tokenData = jwt.decode(token.refreshToken);
+
+      const user = await User.findById(tokenData.id);
+      if (!user) return res.json(false);
+
+      const isValid = jwt.verify(token.refreshToken, process.env.REFRESH_TOKEN_SECRET);
+      if (!isValid) return res.json(false);
+      return res.json(true);
+    } catch (error) {
+      return res.status(500).json({type: error.name, message: error.message});
+    }
+}
+
 // const forgotPassword = async (req, res) => {};
 // const verifyPasswordResetOTP = async () => {};
 // const resetPassword = async () => {};
@@ -84,4 +106,5 @@ const login = async (req, res) => {
 module.exports = {
     register,
     login,
+    verifyToken,
 }
