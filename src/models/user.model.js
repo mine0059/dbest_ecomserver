@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const userSchema = Schema({
     name: {
         type: String,
         required: true,
@@ -28,10 +28,11 @@ const userSchema = new mongoose.Schema({
     isVerified: {type: Boolean, default: false},
     resetPasswordOtp: Number,
     resetPasswordOtpExpires: Date,
+    cart: [{type: Schema.Types.ObjectId, ref: 'CartProduct'}],
     wishList: [
         {
             productId: {
-                type: mongoose.Schema.Types.ObjectId,
+                type: Schema.Types.ObjectId,
                 ref: 'Product',
                 required: true,
             },
@@ -52,5 +53,8 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 userSchema.index({ email: 1 }, { unique: true });
 
-const User = mongoose.model('User', userSchema);
+userSchema.set('toObject', {virtuals: true});
+userSchema.set('toJSON', {virtuals: true});
+
+const User = model('User', userSchema);
 module.exports = User;
