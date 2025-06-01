@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 app.use(`${API}/`, authRouter);
 app.use(`${API}/users`, usersRouter);
 app.use(`${API}/admin`, adminRouter);
-app.use(`${API}/category`, categoryRouter);
+app.use(`${API}/categories`, categoryRouter);
 app.use('/public', express.static(__dirname + '/public'));
 
 const hostname = env.HOST;
